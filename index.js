@@ -66,15 +66,17 @@ const audioClips = [
   }
 ];
 
-class Root extends React.Component {
+class DrumMachine extends React.Component {
   render() {
     return (
       <div id="content-wrapper"
         className="container-fluid"
         style={contentWrapperStyle}>
-        <div className="row align-items-center justify-content-center"
+        <div id="drum-machine"
+          className="row align-items-center justify-content-center"
           style={rowWrapperSyle}>
-          <div className="row w-50">
+          <div id="display"
+            className="row w-50">
             <div id="pads" className="col-md">
               <DrumPads />
             </div>
@@ -91,12 +93,14 @@ class DrumPads extends React.Component {
     return (
       <div>
         {audioClips.map((e) => {
-          return <div className="btn btn-secondary p-5 m-1"
+          return <div id={e.id}
+            className="drum-pad btn btn-secondary p-5 m-1"
             onClick={() => {
               const audio = document.getElementById(e.keyTrigger)
               audio.play()
             }}>
             <audio id={e.keyTrigger}
+              className="clip"
               src={e.url}></audio>
             {e.keyTrigger}
           </div>
@@ -106,4 +110,4 @@ class DrumPads extends React.Component {
   }
 }
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+ReactDOM.render(<DrumMachine />, document.getElementById("root"));
