@@ -1,0 +1,30 @@
+#content-wrapper {
+  color: #ffffff;
+  background-color: #ff696c;
+  height: 100vh;
+}
+
+#row-wrapper {
+  height: 100%;
+  margin: 0;
+}
+
+#drum-machine {
+  max-width: 400px;
+  color: #ff696c;
+  background-color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+  border-radius: 15px;
+}
+
+.btn {
+  width: 105px;
+  background-color: #ff696c;
+  border: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #cd3a3c;
+}
