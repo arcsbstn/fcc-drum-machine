@@ -1,14 +1,3 @@
-const contentWrapperStyle = {
-  color: '#fff',
-  height: '100vh',
-  backgroundColor: '#333'
-}
-
-const rowWrapperSyle = {
-  height: '100%',
-  margin: '0'
-}
-
 const audioClips = [
   {
     keyCode: 81,
@@ -82,14 +71,14 @@ class DrumMachine extends React.Component {
       <div
         id='content-wrapper'
         className='container-fluid'
-        style={contentWrapperStyle}
       >
         <div
-          id='drum-machine'
-          className='row align-items-center justify-content-center'
-          style={rowWrapperSyle}
-        >
-          <div className='row w-50'>
+          id='row-wrapper'
+          className='row align-items-center justify-content-center'>
+          <div
+            id='drum-machine'
+            className='row'
+          >
             <h1 id='display'>
               {this.state.clipName}
             </h1>
