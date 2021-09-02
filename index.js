@@ -67,6 +67,20 @@ const audioClips = [
 ];
 
 class DrumMachine extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      clipName: "Sound"
+    }
+    this.updateDisplayText = this.updateDisplayText.bind(this)
+  }
+
+  updateDisplayText(clipName) {
+    this.setState({
+      clipName: clipName
+    })
+  }
+
   render() {
     return (
       <div id="content-wrapper"
@@ -75,12 +89,11 @@ class DrumMachine extends React.Component {
         <div id="drum-machine"
           className="row align-items-center justify-content-center"
           style={rowWrapperSyle}>
-          <div id="display"
-            className="row w-50">
+          <div className="row w-50">
+            <h1 id="display">{this.state.clipName}</h1>
             <div id="pads" className="col-md">
-              <DrumPads />
+              <DrumPad updateDisplayText={this.updateDisplayText} />
             </div>
-            {/* <div id="controls" className="col-md"></div> */}
           </div>
         </div>
       </div>
@@ -88,7 +101,16 @@ class DrumMachine extends React.Component {
   }
 }
 
-class DrumPads extends React.Component {
+class DrumPad extends React.Component {
+  playAudio(e) {
+    const audio = document.getElementById(e.keyTrigger)
+    audio.play()
+  }
+
+  updateClipName(e, updateDisplayText) {
+    updateDisplayText(e.id)
+  }
+
   render() {
     return (
       <div>
@@ -96,8 +118,8 @@ class DrumPads extends React.Component {
           return <div id={e.id}
             className="drum-pad btn btn-secondary p-5 m-1"
             onClick={() => {
-              const audio = document.getElementById(e.keyTrigger)
-              audio.play()
+              this.playAudio(e)
+              this.updateClipName(e, this.props.updateDisplayText)
             }}>
             <audio id={e.keyTrigger}
               className="clip"
