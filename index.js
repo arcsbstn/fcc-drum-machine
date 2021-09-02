@@ -115,6 +115,23 @@ class DrumMachine extends React.Component {
 }
 
 class DrumPad extends React.Component {
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress)
+  }
+
+  handleKeyPress = (e) => {
+    if ((e.keyCode === this.props.keyTrigger.charCodeAt()) ||
+      (e.keyCode === this.props.keyTrigger.toLowerCase().charCodeAt())) {
+      this.audio.play()
+      this.audio.currentTime = 0
+      this.props.updateDisplayText(this.props.id)
+    }
+  }
+
   handleButtonClick = () => {
     this.audio.play()
     this.audio.currentTime = 0
