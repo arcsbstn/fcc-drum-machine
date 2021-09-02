@@ -92,7 +92,15 @@ class DrumMachine extends React.Component {
           <div className='row w-50'>
             <h1 id='display'>{this.state.clipName}</h1>
             <div id='pads' className='col-md'>
-              <DrumPad updateDisplayText={this.updateDisplayText} />
+              {audioClips.map(clip => {
+                return <DrumPad
+                  id={clip.id}
+                  keyCode={clip.keyCode}
+                  keyTrigger={clip.keyTrigger}
+                  url={clip.url}
+                  updateDisplayText={this.updateDisplayText}
+                />
+              })}
             </div>
           </div>
         </div>
@@ -102,31 +110,24 @@ class DrumMachine extends React.Component {
 }
 
 class DrumPad extends React.Component {
-  playAudio(e) {
-    const audio = document.getElementById(e.keyTrigger)
-    audio.play()
-  }
-
-  updateClipName(e, updateDisplayText) {
-    updateDisplayText(e.id)
+  handleButtonClick() {
+    this.audio.play()
+    this.props.updateDisplayText(this.props.id)
   }
 
   render() {
     return (
-      <div>
-        {audioClips.map((e) => {
-          return <div id={e.id}
-            className='drum-pad btn btn-secondary p-5 m-1'
-            onClick={() => {
-              this.playAudio(e)
-              this.updateClipName(e, this.props.updateDisplayText)
-            }}>
-            <audio id={e.keyTrigger}
-              className='clip'
-              src={e.url}></audio>
-            {e.keyTrigger}
-          </div>
-        })}
+      <div
+        id={this.props.id}
+        className='drum-pad btn btn-secondary p-5 m-1'
+        onClick={() => this.handleButtonClick()}
+      >
+        <audio id={this.props.keyTrigger}
+          className='clip'
+          src={this.props.url}
+          ref={ref => this.audio = ref}
+        />
+        {this.props.keyTrigger}
       </div>
     )
   }
