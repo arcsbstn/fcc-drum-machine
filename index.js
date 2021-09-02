@@ -75,23 +75,28 @@ class DrumMachine extends React.Component {
     this.updateDisplayText = this.updateDisplayText.bind(this)
   }
 
-  updateDisplayText(clipName) {
-    this.setState({
-      clipName: clipName
-    })
-  }
+  updateDisplayText = (clipName) => this.setState({ clipName })
 
   render() {
     return (
-      <div id='content-wrapper'
+      <div
+        id='content-wrapper'
         className='container-fluid'
-        style={contentWrapperStyle}>
-        <div id='drum-machine'
+        style={contentWrapperStyle}
+      >
+        <div
+          id='drum-machine'
           className='row align-items-center justify-content-center'
-          style={rowWrapperSyle}>
+          style={rowWrapperSyle}
+        >
           <div className='row w-50'>
-            <h1 id='display'>{this.state.clipName}</h1>
-            <div id='pads' className='col-md'>
+            <h1 id='display'>
+              {this.state.clipName}
+            </h1>
+            <div
+              id='pads'
+              className='col-md'
+            >
               {audioClips.map(clip => {
                 return <DrumPad
                   id={clip.id}
@@ -110,8 +115,9 @@ class DrumMachine extends React.Component {
 }
 
 class DrumPad extends React.Component {
-  handleButtonClick() {
+  handleButtonClick = () => {
     this.audio.play()
+    this.audio.currentTime = 0
     this.props.updateDisplayText(this.props.id)
   }
 
