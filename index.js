@@ -1,12 +1,12 @@
 const contentWrapperStyle = {
-  color: "#fff",
-  height: "100vh",
-  backgroundColor: "#333"
+  color: '#fff',
+  height: '100vh',
+  backgroundColor: '#333'
 }
 
 const rowWrapperSyle = {
-  height: "100%",
-  margin: "0"
+  height: '100%',
+  margin: '0'
 }
 
 const audioClips = [
@@ -49,7 +49,7 @@ const audioClips = [
   {
     keyCode: 90,
     keyTrigger: 'Z',
-    id: "Kick-n'-Hat",
+    id: 'Kick-n-Hat',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'
   },
   {
@@ -64,13 +64,13 @@ const audioClips = [
     id: 'Closed-HH',
     url: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'
   }
-];
+]
 
 class DrumMachine extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      clipName: "Sound"
+      clipName: 'Sound'
     }
     this.updateDisplayText = this.updateDisplayText.bind(this)
   }
@@ -83,15 +83,15 @@ class DrumMachine extends React.Component {
 
   render() {
     return (
-      <div id="content-wrapper"
-        className="container-fluid"
+      <div id='content-wrapper'
+        className='container-fluid'
         style={contentWrapperStyle}>
-        <div id="drum-machine"
-          className="row align-items-center justify-content-center"
+        <div id='drum-machine'
+          className='row align-items-center justify-content-center'
           style={rowWrapperSyle}>
-          <div className="row w-50">
-            <h1 id="display">{this.state.clipName}</h1>
-            <div id="pads" className="col-md">
+          <div className='row w-50'>
+            <h1 id='display'>{this.state.clipName}</h1>
+            <div id='pads' className='col-md'>
               <DrumPad updateDisplayText={this.updateDisplayText} />
             </div>
           </div>
@@ -116,13 +116,13 @@ class DrumPad extends React.Component {
       <div>
         {audioClips.map((e) => {
           return <div id={e.id}
-            className="drum-pad btn btn-secondary p-5 m-1"
+            className='drum-pad btn btn-secondary p-5 m-1'
             onClick={() => {
               this.playAudio(e)
               this.updateClipName(e, this.props.updateDisplayText)
             }}>
             <audio id={e.keyTrigger}
-              className="clip"
+              className='clip'
               src={e.url}></audio>
             {e.keyTrigger}
           </div>
@@ -132,4 +132,4 @@ class DrumPad extends React.Component {
   }
 }
 
-ReactDOM.render(<DrumMachine />, document.getElementById("root"));
+ReactDOM.render(<DrumMachine />, document.getElementById('root'))
